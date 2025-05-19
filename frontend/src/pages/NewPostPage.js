@@ -1,12 +1,15 @@
-// NewPostPage.js
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
+
+// Use the environment variable for the backend URL (Render or local)
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 const NewPostPage = () => {
   const { isAuthenticated, user } = useAuth0();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
+  // If not authenticated or email is not verified, show an error message
   if (!isAuthenticated || !user?.email_verified) {
     return (
       <div className="pgbody">
@@ -18,13 +21,14 @@ const NewPostPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newPost = {
-      name: title.toLowerCase().replace(/\s+/g, "-"), // slug-friendly
+      name: title.toLowerCase().replace(/\s+/g, "-"), // Slug-friendly
       title,
       content: [content],
     };
   
     try {
-      const response = await fetch("http://localhost:5000/api/articles", {
+      // Use the API_URL environment variable for the request
+      const response = await fetch(`${API_URL}/api/articles`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
