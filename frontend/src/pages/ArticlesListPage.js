@@ -9,8 +9,8 @@ const ArticlesListPage = () => {
   useEffect(() => {
     const loadArticleInfo = async () => {
       try {
-        console.log(`about to get ${API_URL}/articles/`)
-        const response = await axios.get(`${API_URL}/articles/`);
+        console.log(`about to get ${API_URL}/api/articles/`)
+        const response = await axios.get(`${API_URL}/api/articles/`);
         setArticles(response.data);
       } catch (err) {
         console.log(err);

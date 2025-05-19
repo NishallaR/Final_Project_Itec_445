@@ -5,7 +5,7 @@ import axios from "axios";
 // import articles from "./article-content";
 import NotFoundPage from "./NotFoundPage";
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000'
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 const ArticlePage = () => {
   const { name } = useParams();
@@ -19,7 +19,7 @@ const ArticlePage = () => {
       try {
 
         const response = await axios.get(
-          `${API_URL}/articles/${name}`
+          `${API_URL}/api/articles/${name}`
         );
         setArticle(response.data[0]);
       } catch (err) {
@@ -31,7 +31,7 @@ const ArticlePage = () => {
 
   const addUpvote = async () => {
     const response = await axios.put(
-      `${API_URL}/articles/${name}/upvotes`
+      `${API_URL}/api/articles/${name}/upvotes`
     );
     const updatedArticle = response.data;
     console.log(updatedArticle);
